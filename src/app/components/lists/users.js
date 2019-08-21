@@ -25,13 +25,11 @@ function matchDispatchToProps(dispatch){
 }
 function UsersList(props) {
     const handleClick = (value) => {
-      props.history.push(`users/${value}`)
+      props.history.push(`users/${value}/detail`)
     }
     useEffect(()=>{
-      console.log('TEAMID IS ' , props.teamId)
       props.requestFetchUser(props.teamId ? {teamId:props.teamId} : {})
     },[])
-    console.log(props.users)
     return (
       <div className={'lists'}>
           <table className={'table'}>

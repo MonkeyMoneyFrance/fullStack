@@ -13,10 +13,10 @@ export default  [
     path : '/games',
     main : require('../pages/games').default,
     private : true,
-
+    exact:true
   },
   {
-    path : '/games/:gameId',
+    path : '/games/:gameId/detail',
     main: require('../pages/game').default,
     private : true,
     exact:true
@@ -28,16 +28,16 @@ export default  [
     exact:true
   },
   {
+    path : '/users/:userId/detail',
+    main: require('../pages/user').default,
+    private : true,
+    exact:true
+  },
+  {
     path : '/profile',
     main: require('../pages/profile').default,
     private : true,
     exact:true
-  },
-
-  {
-    path : '/bo/user',
-    main: require('../pages/user').default,
-    admin : true,
   },
   {
     path : '/bo/games',
@@ -63,7 +63,7 @@ export default  [
     exact:true,
   },
   {
-    path : '/bo/teams/users/:userId',
+    path : '/bo/teams/users/:userId/detail',
     main: require('../pages/user').default,
     admin : true,
     exact:true,
@@ -75,7 +75,7 @@ export default  [
     admin : true,
   },
   {
-    path : '/bo/users/:userId',
+    path : '/bo/users/:userId/detail',
     main: require('../pages/user').default,
     admin : true,
   }

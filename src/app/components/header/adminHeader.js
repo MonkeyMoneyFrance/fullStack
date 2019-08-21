@@ -3,9 +3,9 @@ import { Link as LinkRouter } from 'react-router-dom';
 import {AppRoot,SlideMenu,HamburgerMenu,BackgroundSlider} from './header'
 import {connect} from 'react-redux'
 import src from "../../assets/logo_fsgt.png"
+import headers from '../../config/headers'
 
-
-function AdminHeader() {
+function AdminHeader(props) {
   const [menuStatus,setStatus] = useState('')
   const toggleMenu = () => setStatus(menuStatus === '' ? 'isopen' : '')
   return (
@@ -15,26 +15,24 @@ function AdminHeader() {
           <img src={src} alt="fsgt" />
           </LinkRouter>
             <nav className='navigator'>
-                <LinkRouter to='/bo/games' >Matchs</LinkRouter>
-              <LinkRouter to='/bo/teams' >Equipes</LinkRouter>
-                <LinkRouter to='/bo/users' >Joueurs</LinkRouter>
+              {((headers.find(h => (new RegExp(h.match)).test(props.pathname)) || {}).menus||[]).map((e,i)=> (
+                  <LinkRouter key={i} to={e.href} >{e.label}</LinkRouter>
+                )
+              )}
              </nav>
             <HamburgerMenu
               onClick={toggleMenu}
               className={ menuStatus }><span></span><span></span><span></span><span></span></HamburgerMenu>
-          }
+
           <SlideMenu className={menuStatus}>
-           <ul>
-             <li >
-               <LinkRouter to='/bo/games' >Matchs</LinkRouter>
-             </li>
-             <li >
-               <LinkRouter to='/bo/teams' >Equipes</LinkRouter>
-             </li>
-             <li >
-               <LinkRouter to='/bo/users' >Joueurs</LinkRouter>
-             </li>
-           </ul>
+            <ul>
+              {((headers.find(h => (new RegExp(h.match)).test(props.pathname)) || {}).menus||[]).map((e,i)=> (
+                <li key={i} >
+                  <LinkRouter to={e.href} >{e.label}</LinkRouter>
+                </li>
+                )
+              )}
+            </ul>
          </SlideMenu>
     </AppRoot>
 
