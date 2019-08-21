@@ -6,6 +6,41 @@ textarea, input.fullWidth {
      resize: none;
 
 }
+
+.gameAvatar{
+  display:flex;
+  .innerContainerLeft  {
+
+    & > div {
+      width:50%;
+      background-color: red;
+    }
+  }
+  .innerContainerRight{
+    flex-direction: column;
+    display: flex;
+
+    justify-content: space-around;
+    .container {
+      background-color: green;
+
+    }
+  }
+  & > div {
+    background-color: blue;
+    flex:1;
+    & > .container {
+      width:50%;
+
+    }
+  }
+
+  & .p2 {
+    margin : 0.5em 1em;
+  }
+
+
+}
 .container {
   display: flex;
   flex-direction: row;

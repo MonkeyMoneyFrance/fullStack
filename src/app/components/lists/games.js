@@ -43,7 +43,7 @@ function GamesList(props) {
             </tr>
             </thead>
             <tbody>
-              {(props.games||rows).map((row,i)=> (
+              {(rows).map((row,i)=> (
                 <tr
                   onClick={event => handleClick(row._id)}
                   key={row._id || i}

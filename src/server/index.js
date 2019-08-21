@@ -24,7 +24,8 @@ const port = process.env.PORT || '3000'
 const secretKey =  process.env.SECRETKEY || 'abcdefghijklmnopqrstuvwxyz'
 const dbUser =  process.env.DBUSER || null
 const dbPass = process.env.DBPASS || null
-const connnectString =  "mongodb+srv://"+dbUser+":"+dbPass+"@cluster0-40t5m.mongodb.net/test"
+const dbCluster = process.env.DBCLUSTER || null
+const connnectString =  "mongodb+srv://"+dbUser+":"+dbPass+"@"+dbCluster+".mongodb.net/test"
 
 mongoose.connect(connnectString,
 {

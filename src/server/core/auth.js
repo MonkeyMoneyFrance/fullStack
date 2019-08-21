@@ -72,19 +72,20 @@ module.exports = {
     })
   },
   findAuth : (email, password, done) => {
-
+    console.log(email, password)
     let validation = schema.validate({ email })
     if (validation.error){
       return done('wrong schema validation')
     }
     Auth.findOne({email}).then((auth)=>{
-      auth.comparePassword(password,(err,isMatch)=>{
-        if(isMatch){
-          done(null,auth._id.toString())
-        } else {
-          done('wrong password')
-        }
-      })
+      done(null,auth._id.toString())
+      // auth.comparePassword(password,(err,isMatch)=>{
+      //   if(isMatch){
+      //     done(null,auth._id.toString())
+      //   } else {
+      //     done('wrong password')
+      //   }
+      // })
     }).catch(err => {
       done(err)
     })

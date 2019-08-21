@@ -65,31 +65,44 @@ function Game(props) {
         game = {props.game}
       />
         <Container >
-          <Coach
-            id={'teamA'}
-            {...defaultProps.teamA}
-            setData={setJson}
-          />
-          <Coach
-            id={'teamB'}
-            {...defaultProps.teamB}
-            setData={setJson}
-          />
-        </Container>
-        <Container>
-          <div>
-            <Player
-              players={(defaultProps.teamA||{}).players}
-              setData={setJson}
-            />
-        </div>
-          <div>
-            <Player
-              players={(defaultProps.teamB||{}).players}
-              setData={setJson}
-            />
+
+          <div style={{flex:1,display:'flex',justifyContent:'flex-start'}}>
+            <div>
+              Titre
+              <Coach
+                id={'teamA'}
+                {...defaultProps.teamA}
+                setData={setJson}
+              />
+              <div>
+                <Player
+                  players={(defaultProps.teamA||{}).players}
+                  setData={setJson}
+                />
+              </div>
+            </div>
+
           </div>
+          <div style={{flex:1,display:'flex',justifyContent:'flex-end'}}>
+            <div>
+              Titre
+              <Coach
+                id={'teamB'}
+                {...defaultProps.teamB}
+                setData={setJson}
+              />
+              <div>
+                <Player
+                  players={(defaultProps.teamB||{}).players}
+                  setData={setJson}
+                />
+              </div>
+            </div>
+
+          </div>
+
         </Container>
+
         <ScheduleGame
           id={'general'}
           setData={setJson}

@@ -27,9 +27,21 @@ const Button = styled.button`
 
 const Container = styled.div`
   display:flex;
-  justify-content:space-between
-  & > div {background-color:#FFFFFF;border-radius : 10px;
+  justify-content:space-between;
+  background-color:pink;
+  @media(max-width:758px){
+    background-color:yellow;
+    flex-direction : column;
+  }
+  & > div > div {
+    margin-top:30px;
+    width:80%;
+    border-radius : 10px;
     box-shadow: 0 2px 4px 0 rgba(153,153,153,0.50);
+    background-color:blue
+    @media(max-width:758px){
+      width:100%;
+    }
 
   }
 `
