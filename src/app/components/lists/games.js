@@ -24,7 +24,7 @@ function matchDispatchToProps(dispatch){
 }
 function GamesList(props) {
     const handleClick = (value) => {
-      props.history.push(`games/${value}`)
+      props.history.push(`games/${value}/detail`)
     }
     useEffect(()=>{
       props.requestFetchGame()

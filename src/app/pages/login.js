@@ -22,11 +22,9 @@ function Login (props) {
       props.requestLogin({email,password})
     }
     useEffect(() => {
-
       if ((props.auth||{}).authenticated == 'AUTHENTICATED') {
         window.location.href = '/games'
       }
-
     });
     const submitHandler = (e) => {
         e.preventDefault();
@@ -63,7 +61,6 @@ function Login (props) {
                     onChange = {(e)=>setPass(e.target.value)}
                   />
               </div>
-
 
             <div >
               <button
