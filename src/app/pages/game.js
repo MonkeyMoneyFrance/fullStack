@@ -66,26 +66,24 @@ function Game(props) {
       />
         <Container >
 
-          <div style={{flex:1,display:'flex',justifyContent:'flex-start'}}>
+          <div style={{flex:1,display:'flex',justifyContent:'flex-start',}}>
             <div>
-              Titre
+              <h4>Équipe A</h4>
               <Coach
                 id={'teamA'}
                 {...defaultProps.teamA}
                 setData={setJson}
               />
-              <div>
                 <Player
                   players={(defaultProps.teamA||{}).players}
                   setData={setJson}
                 />
-              </div>
             </div>
 
           </div>
           <div style={{flex:1,display:'flex',justifyContent:'flex-end'}}>
             <div>
-              Titre
+              <h4>Équipe B</h4>
               <Coach
                 id={'teamB'}
                 {...defaultProps.teamB}
@@ -114,7 +112,7 @@ function Game(props) {
         />
         <p>Réclamations, reserves et observations AVANT, PENDANT et APRES la recontre</p>
         <div className={"container wrap"}>
-          <div style={{flex:1,width:"100%"}}>
+          <div className={"containerequipe"} style={{flex:1,width:"100%"}}>
             <h5>Equipe A</h5>
             <Remarks
               id={'teamA'}
@@ -122,7 +120,7 @@ function Game(props) {
               setData={setJson}
             />
           </div>
-          <div style={{flex:1,width:"100%"}}>
+          <div className={"containerequipe"} style={{flex:1,width:"100%",}}>
             <h5>Equipe B</h5>
             <Remarks
               id={'teamB'}
@@ -131,7 +129,7 @@ function Game(props) {
             />
           </div>
         </div>
-        <p>SINATURES OBLIGATOIRES</p>
+        <p>Signatures obligatoires</p>
         <Signatures />
         <Container>
           <Button

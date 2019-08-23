@@ -18,7 +18,7 @@ function Referee(props) {
   return (
     <div style={{flex:1,backgroundColor: 'red'}}>
       <div className={"container"}>
-        <div>
+        <div >
           <input
             type="checkbox"
             id="refPresent"

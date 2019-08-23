@@ -19,7 +19,6 @@ textarea, input.fullWidth {
   .innerContainerRight{
     flex-direction: column;
     display: flex;
-
     justify-content: space-around;
     .container {
       background-color: green;
@@ -41,6 +40,38 @@ textarea, input.fullWidth {
 
 
 }
+.horizontalcontainer{padding-bottom: 20px;
+  display:flex;
+  justify-content:space-between;
+input {width: 200px;justify-content: flex-start}}
+
+.containerwrap {padding-bottom: 10px}
+
+.Autocompletevertical {padding-bottom: 10px}
+
+.containerequipe{
+  background-color: purple;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 10px;
+}
+
+p{
+   display: block;
+   text-align:center;
+}
+.fullWidth {height: 150px;font-size: 20px}
+
+.containertime{
+  background-color: yellow;
+  display:flex;
+  justify-content: flex-start;
+  margin-top: 30px;
+input {margin-left: 20px;}}
+
+
+
+
 .container {
   display: flex;
   flex-direction: row;
@@ -88,9 +119,10 @@ textarea, input.fullWidth {
       justify-content: flex-end;
     }
   }
+
   .button {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     button {
       margin:1em;
       background-color:green;

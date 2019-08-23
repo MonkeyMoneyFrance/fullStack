@@ -30,7 +30,7 @@ const Container = styled.div`
   justify-content:space-between;
   background-color:pink;
   @media(max-width:758px){
-    background-color:yellow;
+    background-color:purple;
     flex-direction : column;
   }
   & > div > div {
@@ -38,7 +38,8 @@ const Container = styled.div`
     width:80%;
     border-radius : 10px;
     box-shadow: 0 2px 4px 0 rgba(153,153,153,0.50);
-    background-color:blue
+    background-color:orange;
+    padding: 10px;
     @media(max-width:758px){
       width:100%;
     }

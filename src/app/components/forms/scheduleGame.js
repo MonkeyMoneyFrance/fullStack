@@ -10,7 +10,7 @@ function ScheduleGame(props) {
       props.setData(props.id,{["startGame"]:value})
     }
     return (
-      <div className='container'>
+      <div className='containertime'>
         <div className={"p2"}>Heure du coup d'envoi d'effectif de la recontre</div>
         <input
           value={value}

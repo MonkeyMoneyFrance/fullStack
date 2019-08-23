@@ -13,22 +13,19 @@ function Coach(props) {
     }
     useEffect(() => setPresent(props.coachPresent||false),[])
     return (
-      <div style={{flex:1}}>
-        <div className={"container"}>
-          <div>
-            <input
-              type="checkbox"
-              id="coachPresent"
-              name="coachPresent"
-              checked={coachPresent}
-              onChange={onSwitch}
-             />
-            <label htmlFor="coachPresent">Coach</label>
-          </div>
-        </div>
-        <div className={"container"}>
+        <div className={"horizontalcontainer"}>
+          <input
+            type="checkbox"
+            id="coachPresent"
+            name="coachPresent"
+            checked={coachPresent}
+            onChange={onSwitch}
+           />
+          <label htmlFor="coachPresent">Coach</label>
+
+
           <div className='p2' >Fait par :</div>
-          <div className={"container wrap"} >
+          <div className={"containerwrap"} >
             <LicenseInput
               id = {"coachId"}
               defaultValue={props.coachId}
@@ -38,10 +35,8 @@ function Coach(props) {
               id = {"coachTeamId"}
               defaultValue={props.coachTeamId}
               setValue={setValue}
-            />
-          </div>
+            /></div>
         </div>
-      </div>
     )
   }
 

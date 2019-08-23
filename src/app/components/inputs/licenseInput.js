@@ -27,7 +27,7 @@ function LicenseInput(props){
   const displayedValue = (props.items.find(i => i.id == (value || props.value))||{})[props.item || 'id']
 
   return (
-    <div >
+    <div className={"Autocompletevertical"}>
       <Autocomplete
         inputProps = {{disabled:props.disabled ||false}}
         getItemValue={(item) => item.id}
