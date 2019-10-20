@@ -22,9 +22,6 @@ export default function user(state = initialState, action){
         return newState
       }
       break;
-    case TODOS_FAILURE:
-     return []
-    break;
     default:
       return state
     break;

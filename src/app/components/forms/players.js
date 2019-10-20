@@ -10,14 +10,15 @@ function Players(props) {
       const newJson = [...players]
       newJson[id] = value
       setPlayers(newJson)
-      props.setData(props.id,newJson)
+      props.setData(props.id,{players:newJson})
     }
-    useEffect(() => setPlayers(props.players),[])
+    useEffect(() => setPlayers(props.players||[]),[])
     const rows = Array.from(Array(players.length+1).keys())
 
     return (
-
-        <table>
+      <>
+        <h3>Joueurs</h3>
+        <table style={{width:"100%"}}>
           <thead>
             <tr>
               <td>N°</td>
@@ -29,28 +30,30 @@ function Players(props) {
             {rows.map((e,i) => {
               let player = players[i]
               return (
-                <tr
-                  key={i}
-                  >
+                <tr key={i}>
                   <td>{i+1}</td>
-                  <td><LicenseInput
-                    id = {i}
-                    defautValue={player}
-                    item={'label'}
-                    setValue={setValue}
-                  /></td>
-                  <td><LicenseInput
-                    disabled
-                    value={player}
-                    setValue={setValue}
-                  /></td>
+                  <td>
+                    <LicenseInput
+                      id = {i}
+                      value={player}
+                      item={'label'}
+                      setValue={setValue}
+                    />
+                  </td>
+                  <td>
+                    <LicenseInput
+                      disabled
+                      value={player}
+                      setValue={setValue}
+                    />
+                  </td>
                 </tr>
               )
             })}
           </tbody>
 
         </table>
-
+        </>
 
 )
 }

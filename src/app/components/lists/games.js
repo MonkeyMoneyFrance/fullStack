@@ -40,19 +40,19 @@ function GamesList(props) {
                 <td >Résultat</td>
                 <td >Equipe B</td>
                 <td >Statut</td>
-            </tr>
+              </tr>
             </thead>
             <tbody>
-              {(rows).map((row,i)=> (
+              {(props.games||[]).map((row,i)=> (
                 <tr
                   onClick={event => handleClick(row._id)}
                   key={row._id || i}
                   >
                   <td>{row.playedAt}</td>
                   <td>{(row.teams[0]||{}).teamId}</td>
-                <td >{(row.teams[0]||{}).score} - {(row.teams[1]||{}).score}</td>
+                  <td >{(row.teams[0]||{}).score} - {(row.teams[1]||{}).score}</td>
                   <td >{(row.teams[1]||{}).teamId}</td>
-                <td >{row.status}</td>
+                  <td >{row.status}</td>
                 </tr>
               ))}
             </tbody>

@@ -1,4 +1,6 @@
 import React , { useState, useEffect } from 'react';
+import styled from "styled-components"
+
 
 function ScheduleGame(props) {
 
@@ -10,7 +12,8 @@ function ScheduleGame(props) {
       props.setData(props.id,{["startGame"]:value})
     }
     return (
-      <div className='container'>
+
+      <>
         <div className={"p2"}>Heure du coup d'envoi d'effectif de la recontre</div>
         <input
           value={value}
@@ -24,8 +27,8 @@ function ScheduleGame(props) {
           onChange={onChange}
           onBlur={onBlur}
         />
+      </>
 
-      </div>
 
 )
 }

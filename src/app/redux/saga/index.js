@@ -6,7 +6,8 @@ import {
   REQUEST_FETCH_GAME,
   REQUEST_FETCH_RESULT,
   REQUEST_FETCH_USER,
-  REQUEST_FETCH_TEAM
+  REQUEST_FETCH_TEAM,
+  REQUEST_SET_RESULTS
 } from '../constants'
 import {encodeParams} from '../../functions'
 const URL = (process.env.NODE_ENV == 'production') ? 'api/' : "http://localhost:3000/api/"
@@ -35,7 +36,32 @@ function* requestFetchGame (action = '') {
     console.log(e)
   }
 }
+function* requestSetResults (action = '' ) {
+  try {
+    const options = {
+      credentials: 'include',
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    }
+    let params = ''
+    params = "?" + Object.keys(action.payload)
+             .map(k => encodeURIComponent(k) + '=' + encodeURIComponent((action.payload||{})[k]))
+             .join('&')
 
+    const res = yield call(fetch, URL + 'results' + params, options)
+    if (res.status == 200){
+      const results = yield res.json()
+      yield put(fetchResult(results))
+    } else {
+      throw "unable to authenticate"
+    }
+    } catch (e) {
+      yield put(sessionFailure({authenticated:'UNAUTHENTICATED'}))
+    }
+
+}
 function* requestFetchResult (action = '') {
   try {
   const options = {
@@ -171,6 +197,7 @@ function* requestFetchTeam (action = '') {
 // }
 
 function* rootSaga() {
+  yield takeLatest(REQUEST_SET_RESULTS , requestSetResults)
   yield takeLatest(REQUEST_FETCH_GAME,requestFetchGame)
   yield takeLatest(REQUEST_FETCH_RESULT,requestFetchResult)
   yield takeLatest(REQUEST_FETCH_TEAM,requestFetchTeam)

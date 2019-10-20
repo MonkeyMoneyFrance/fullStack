@@ -39,20 +39,6 @@ mongoose.connect(connnectString,
 .then(()=>{console.log('connected')})
 .catch((e)=>console.log(e));
 
-
-app.use(helmet())
-app.use(bodyParser.urlencoded({limit: '2mb', extended: true}))
-app.use(bodyParser.json({limit: '2mb', extended: true}))
-app.use(session({
-  genid: (req) => {
-    return uuid() // use UUIDs for session IDs
-  },
-  store: new redisStore({ host: 'localhost', port: 6379, client: client,ttl :  260}),
-  secret: process.env.SECRETKEY,
-  resave: false,
-  saveUninitialized: true
-}))
-
 if (process.env.NODE_ENV !== 'production') {
   app.use(cors({origin: 'http://localhost:8080', credentials: true }));
 } else {
@@ -61,6 +47,32 @@ if (process.env.NODE_ENV !== 'production') {
     res.sendFile(path.resolve('index.html'))
   })
 }
+
+app.use(helmet())
+app.use(bodyParser.urlencoded({limit: '2mb', extended: true}))
+app.use(bodyParser.json({limit: '2mb', extended: true}))
+app.use(session({
+  store: new redisStore({ host: 'localhost', port: 6379, client: client,ttl :  260}),
+  secret: "POPOPOPOPOPOP",
+  resave: false,
+  saveUninitialized: false,
+  cookie : {
+    name:'s3ssionName',
+    secure:process.env.NODE_ENV === 'production',
+    maxAge : 1200000
+  },
+}))
+app.use(function(req,res,next) {
+  let length = 0;
+  for (var i =0; i<Object.keys(req.body).length;i++){
+    length = length + String(req.body[Object.keys(req.body)[i]]).length
+  }
+  console.dir(req.method+ " "+req.path+" "
+    +(Object.keys(req.query).length == 0 ? "" : JSON.stringify(req.query)+" ")
+    +(length > 50 ? "" : JSON.stringify(req.body)+" "));
+  next()
+})
+
 
 passport.use(new LocalStrategy(
   { usernameField: 'email' },auth.findAuth

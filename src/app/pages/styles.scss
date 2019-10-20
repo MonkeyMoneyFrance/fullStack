@@ -1,3 +1,25 @@
+input:not([type='checkbox']){
+  width:100%;
+  border: 1px solid black;
+  box-sizing: border-box;
+  color:inherit;
+  padding: 0.2em 0.5em;
+  line-height:34px;
+  font-size: 1em;
+  outline: none;
+  &:focus{
+    border: 1px solid blue;
+    box-shadow: 0 0 2px blue;
+  }
+  &.error{
+    border: 1px solid red;
+    box-shadow: 0 0 2px red;
+  }
+  &:disabled {
+    background-color: #F5F5F5;
+  }
+}
+
 textarea, input.fullWidth {
      width: 100%;
      box-sizing: border-box;
@@ -6,41 +28,47 @@ textarea, input.fullWidth {
      resize: none;
 
 }
-
-.gameAvatar{
-  display:flex;
-  .innerContainerLeft  {
-
-    & > div {
-      width:50%;
-      background-color: red;
+.form {
+  width:100%;
+  input {
+    &.error{
+      border : 1px solid red;
     }
   }
-  .innerContainerRight{
-    flex-direction: column;
-    display: flex;
-
-    justify-content: space-around;
-    .container {
-      background-color: green;
-
-    }
-  }
-  & > div {
-    background-color: blue;
-    flex:1;
-    & > .container {
-      width:50%;
-
-    }
-  }
-
-  & .p2 {
-    margin : 0.5em 1em;
-  }
-
-
 }
+// .gameAvatar{
+//   display:flex;
+//   .innerContainerLeft  {
+//     & > div {
+//       width:50%;
+//       background-color: red;
+//     }
+//   }
+//   .innerContainerRight{
+//     flex-direction: column;
+//     display: flex;
+//
+//     justify-content: space-around;
+//     .container {
+//       background-color: green;
+//
+//     }
+//   }
+//   & > div {
+//     background-color: blue;
+//     flex:1;
+//     & > .container {
+//       width:50%;
+//
+//     }
+//   }
+//
+//   & .p2 {
+//     margin : 0.5em 1em;
+//   }
+//
+//
+// }
 .container {
   display: flex;
   flex-direction: row;

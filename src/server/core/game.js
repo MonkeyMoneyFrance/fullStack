@@ -31,6 +31,7 @@ module.exports = {
           params.before ? {playedAt : {'$lte' : params.before}} : {},
         ]
       }).then((results)=>{
+        console.log(results)
           res.status(200).send(results)
       }).catch(err => res.status(500).send(err))
   },

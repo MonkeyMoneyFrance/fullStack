@@ -6,7 +6,8 @@ const PrivateLayout = styled.div`
   min-height:100%;
   & > .content {
     margin:auto;
-    max-width:95%;
+    width:95%;
+    max-width:1200px;
     padding-top: 5rem
   }
 `
@@ -27,6 +28,7 @@ const PublicLayout = styled.div`
   /* min-height:100%; */
   /* overflow:hidden; */
   & > .content {
+
     margin:auto;
     height:100%
   }

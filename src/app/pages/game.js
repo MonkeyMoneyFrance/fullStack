@@ -1,5 +1,5 @@
 import React , { useState, useEffect } from 'react';
-import {Container,Button} from './layout'
+import {Container,Button,Row,SeparateContainer} from './layout'
 import GameAvatar from '../components/avatars/game';
 import Player from '../components/forms/players';
 import Coach from '../components/forms/coach';
@@ -10,14 +10,27 @@ import Referee from '../components/forms/referee';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux'
 import "./styles.scss"
-import {requestFetchGame} from '../redux/actions';
-
+import styled from 'styled-components'
+import {requestFetchGame,requestFetchResult} from '../redux/actions';
+const ResultContainer = styled.div`
+  padding : 0.5em;
+  display:flex;
+  flex-direction:column;
+  min-height : 100vh;
+  background-color:white;
+}
+`
 let mochaGame = {
-  "main": {
-    "date": "2018-03-22T04:06:07.000Z",
+  "date": "2018-03-22T04:06:07.000Z",
+  "status": 0,
+  "division": "BCUGEDFJED",
+  "_id": "5d4ad4341c9d4400007ff577"
+}
+let mochaResult = {
+  "general" : {
     "refPresent": true,
-    "status": 0,
-    "division": "BCUGEDFJED"
+    "resultA" : 3,
+    "resultB": 1
   },
   "signatures": {
     "teamA": [
@@ -32,93 +45,100 @@ let mochaGame = {
   "teamA": {
     "before": "PLEIN DE REMARQUES",
     "coachPresent": true,
-    "players": []
+    "players": ["XAVI2", "GEO3"]
   },
   "teamB": {
     "players": []
   },
   "_id": "5d4ad4341c9d4400007ff577"
 }
-let mochaMatch = {}
+
+
 function mapStateToProps(state,props){
   return {
-    // default : (state.results)
-    default : mochaGame,
-    game : (state.games||[]).find(g => g._id == props.match.params.gameId) || mochaMatch
+    result : (state.results||[]).find(g => g._id == props.match.params.gameId) || mochaResult,
+    game : (state.games||[]).find(g => g._id == props.match.params.gameId) || mochaGame
   }
 }
 function matchDispatchToProps(dispatch){
-  return bindActionCreators({requestFetchGame},dispatch)
+  return bindActionCreators({requestFetchResult,requestFetchGame},dispatch)
 }
 function Game(props) {
-  const [data , setData] = useState({})
+  const [data , setData] = useState({...props.result})
   const setJson = (id,value) => setData({...data,[id]:{...data[id],...value}})
   useEffect(()=> {
-    if (!props.game) props.requestFetchGame({_id:props.match.params.gameId})
+    props.requestFetchResult({_id:props.match.params.gameId})
+    props.requestFetchGame({_id:props.match.params.gameId})
   }, [])
-  const defaultProps = props.default || {}
-  if (!props.default || !props.game) return null
+  const Submit = () => {
+    console.log(data)
+    // props.requestFetchResult({_id:props.match.params.gameId})
+  }
+  const defaultGame =  props.game || props.defaultProps
+  const defaultResult =  data
+  if (!props.game) return null
+  // return null
   return (
-    <div style={{padding:"0.5em"}}>
+    <ResultContainer>
+      <div style={{flexGrow:1}}>
       <GameAvatar
-        {...defaultProps}
-        game = {props.game}
+        id={'general'}
+        {...defaultGame}
+        {...defaultResult.general}
+        setData={setJson}
       />
         <Container >
-
-          <div style={{flex:1,display:'flex',justifyContent:'flex-start'}}>
-            <div>
-              Titre
+          <SeparateContainer>
+            <Row>
               <Coach
                 id={'teamA'}
-                {...defaultProps.teamA}
+                {...defaultResult.teamA}
                 setData={setJson}
               />
-              <div>
-                <Player
-                  players={(defaultProps.teamA||{}).players}
-                  setData={setJson}
-                />
-              </div>
-            </div>
-
-          </div>
-          <div style={{flex:1,display:'flex',justifyContent:'flex-end'}}>
-            <div>
-              Titre
+              <Player
+                id={'teamA'}
+                players={(defaultResult.teamA||{}).players}
+                setData={setJson}
+              />
+            </Row>
+          </SeparateContainer>
+          <SeparateContainer>
+            <Row>
               <Coach
                 id={'teamB'}
-                {...defaultProps.teamB}
+                {...defaultResult.teamB}
                 setData={setJson}
               />
-              <div>
-                <Player
-                  players={(defaultProps.teamB||{}).players}
-                  setData={setJson}
-                />
-              </div>
-            </div>
-
-          </div>
+              <Player
+                id={'teamB'}
+                players={(defaultResult.teamB||{}).players}
+                setData={setJson}
+              />
+            </Row>
+          </SeparateContainer>
 
         </Container>
-
-        <ScheduleGame
-          id={'general'}
-          setData={setJson}
-        />
-        <Referee
-          id={'referee'}
-          {...defaultProps.main}
-          setData={setJson}
-        />
+        <Row>
+          <ScheduleGame
+            id={'general'}
+            setData={setJson}
+          />
+        </Row>
+        <Row>
+          <Referee
+            id={'general'}
+            {...defaultResult.general}
+            setData={setJson}
+          />
+        </Row>
+        <Row>
         <p>Réclamations, reserves et observations AVANT, PENDANT et APRES la recontre</p>
         <div className={"container wrap"}>
           <div style={{flex:1,width:"100%"}}>
             <h5>Equipe A</h5>
             <Remarks
               id={'teamA'}
-              {...defaultProps.teamA}
+              {...defaultResult.teamA}
               setData={setJson}
             />
           </div>
@@ -126,21 +146,25 @@ function Game(props) {
             <h5>Equipe B</h5>
             <Remarks
               id={'teamB'}
-              {...defaultProps.teamB}
+              {...defaultResult.teamB}
               setData={setJson}
             />
           </div>
+        </div>
+        </Row>
+
         </div>
         <p>SINATURES OBLIGATOIRES</p>
         <Signatures />
         <Container>
           <Button
+            onClick = {Submit}
             type="submit"
             >
               Enregistrer
             </Button>
         </Container>
-      </div>
+    </ResultContainer>
 )
 }
 

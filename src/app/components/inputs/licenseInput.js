@@ -5,9 +5,9 @@ import {connect} from 'react-redux'
 
 const mapStateToProps = (state) => {
   let items = [
-    { id : "YUIYIBJ" , label: 'Geoffroy' },
-    { id : "YUIYIBA" , label: 'Nico' },
-    { id : "YUIYIBG" , label: 'Xavi' },
+    { id : "GEO3" , label: 'Geoffroy' },
+    { id : "NICO1" , label: 'Nico' },
+    { id : "XAVI2" , label: 'Xavi' },
   ]
   return {
     items
@@ -19,7 +19,6 @@ function LicenseInput(props){
   const [value, setValue] = useState(props.value ||'')
   const onChange = (e) => setValue(e.target.value)
   const onSelect = (value) => {
-
     props.setValue(props.id,value)
     setValue(value)
   }
@@ -27,7 +26,7 @@ function LicenseInput(props){
   const displayedValue = (props.items.find(i => i.id == (value || props.value))||{})[props.item || 'id']
 
   return (
-    <div >
+
       <Autocomplete
         inputProps = {{disabled:props.disabled ||false}}
         getItemValue={(item) => item.id}
@@ -40,8 +39,9 @@ function LicenseInput(props){
         value={displayedValue}
         onChange={onChange}
         onSelect={onSelect}
+        wrapperProps={{ style: {width:"100%"} }}
       />
-    </div>
+
   )
 }
 

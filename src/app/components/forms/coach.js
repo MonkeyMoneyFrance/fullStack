@@ -9,8 +9,9 @@ function Coach(props) {
     }
     const onSwitch = (e) => {
       setPresent(!coachPresent)
-      props.setData(props.id,{coachPresent})
+      props.setData(props.id,{coachPresent:!coachPresent})
     }
+
     useEffect(() => setPresent(props.coachPresent||false),[])
     return (
       <div style={{flex:1}}>
@@ -26,20 +27,23 @@ function Coach(props) {
             <label htmlFor="coachPresent">Coach</label>
           </div>
         </div>
+        <div className='p2' >Fait par :</div>
         <div className={"container"}>
-          <div className='p2' >Fait par :</div>
-          <div className={"container wrap"} >
-            <LicenseInput
-              id = {"coachId"}
-              defaultValue={props.coachId}
-              setValue={setValue}
-            />
-            <LicenseInput
-              id = {"coachTeamId"}
-              defaultValue={props.coachTeamId}
-              setValue={setValue}
-            />
-          </div>
+            <>
+              <LicenseInput
+                id = {"coachId"}
+                value={props.coachId}
+                item={'label'}
+                setValue={setValue}
+              />
+              <LicenseInput
+                // id = {"coachTeamId"}
+                disabled
+                value={props.coachId}
+                setValue={setValue}
+              />
+
+          </>
         </div>
       </div>
     )
