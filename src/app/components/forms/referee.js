@@ -17,7 +17,7 @@ function Referee({refPresent,id,setData,refId}) {
   return (
     <div style={{flex:1}}>
       <div className={"container"}>
-        <span>
+        <div >
           <input
             type="checkbox"
             id="refPresent"
@@ -26,7 +26,7 @@ function Referee({refPresent,id,setData,refId}) {
             onChange={onSwitch}
           />
           <label htmlFor="refPresent">Observation de la rencontre</label>
-        </span>
+        </div>
       </div>
       <div className={"container"}>
         <div className={'p2'}>

@@ -15,7 +15,7 @@ function Coach(props) {
     useEffect(() => setPresent(props.coachPresent||false),[])
     return (
       <div style={{flex:1}}>
-        <div className={"container"}>
+        <div className={"horizontalcontainer"}>
           <div>
             <input
               type="checkbox"

@@ -134,7 +134,7 @@ function Game(props) {
         <Row>
         <p>Réclamations, reserves et observations AVANT, PENDANT et APRES la recontre</p>
         <div className={"container wrap"}>
-          <div style={{flex:1,width:"100%"}}>
+          <div className={"containerequipe"} style={{flex:1,width:"100%"}}>
             <h5>Equipe A</h5>
             <Remarks
               id={'teamA'}
@@ -142,7 +142,7 @@ function Game(props) {
               setData={setJson}
             />
           </div>
-          <div style={{flex:1,width:"100%"}}>
+          <div className={"containerequipe"} style={{flex:1,width:"100%",}}>
             <h5>Equipe B</h5>
             <Remarks
               id={'teamB'}
